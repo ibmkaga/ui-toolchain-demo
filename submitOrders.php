@@ -1,12 +1,6 @@
 <?php
-require_once("service-discovery.php");
+
 $data = file_get_contents('php://input');
-$services = getenv("VCAP_SERVICES");
-$services_json = json_decode($services, true);
-
-// Get the orders application url route from service discovery
-//$ordersRoute = getAPIRoute("Orders-API");
-
 $application = getenv("VCAP_APPLICATION");
 $application_json = json_decode($application, true);
 $applicationName = $application_json["name"];
@@ -17,10 +11,8 @@ $ordersHost = substr_replace($applicationURI, $ordersAppName, 0, strlen($applica
 $ordersRoute = "http://" . $ordersHost;
 $ordersURL = $ordersRoute . "/rest/orders";
 
-//$ordersURL = $ordersRoute . "/rest/orders";
-//$ordersURL = "http://ms-ordersAPI-hyperfunctional-throstle.mybluemix.net/rest/orders";
-
-function httpPost($data,$url){
+function httpPost($data,$url)
+{
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL,$url);
 	curl_setopt($ch, CURLOPT_POST, true);  
@@ -33,6 +25,6 @@ function httpPost($data,$url){
 	return $code;
 }
 
-echo json_encode(array("httpCode" => httpPost($data, $ordersURL), "ordersURL" => $ordersURL));
+echo json_encode(array("httpCode" => httpPost($data,$ordersURL), "ordersURL" => $ordersURL));
 
 ?>
