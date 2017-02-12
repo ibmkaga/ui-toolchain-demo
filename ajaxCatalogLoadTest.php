@@ -7,7 +7,7 @@
     $catalogAppName = str_replace("-ui", "-catalog-api", $catalogAppName);
     $applicationURI = $application_json["application_uris"][0];
     $catalogHost=substr_replace($applicationURI, $catalogAppName, 0, strlen($applicationName));
-    $catalogRoute = "http://" . $catalogHost;
+    $catalogRoute = "https://" . $catalogHost;
 
     if (isset($_GET['count'])) {
         $count = $_GET['count'];
