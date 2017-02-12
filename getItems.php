@@ -11,10 +11,10 @@ function RetrieveItems()
     if (substr( $applicationURI, 0, 3 ) === "ui-") {
         $catalogHost = "catalog-api-" . substr($applicationURI, 3);
     } else {
-        $catalogHost = str_replace("-ui-", "-catalog-api-", $applicationURI);
+        $catalogHost = str_replace("-ui", "-catalog-api", $applicationURI);
     }
     //echo "\r\ncatalogHost:" . $catalogHost;    
-    $catalogRoute = "http://" . $catalogHost;
+    $catalogRoute = "https://" . $catalogHost;
     //echo "\r\ncatalogRoute:" . $catalogRoute;    
     $url = $catalogRoute . "/items";
 
